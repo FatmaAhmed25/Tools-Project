@@ -1,19 +1,26 @@
 package entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Id;
 
+
 @Entity
-public class Meal {
-	
+public class Restaurant {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 	private String name;
+	private int ownerId;
+	@OneToMany
+	@JoinColumn(name="restaurantId")
+	private List<Meal>meals;
 	public int getId() {
 		return Id;
 	}
@@ -26,17 +33,11 @@ public class Meal {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double getPrice() {
-		return price;
+	public int getOwnerId() {
+		return ownerId;
 	}
-	public void setPrice(double price) {
-		this.price = price;
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
 	}
-	private double price;
 	
-	@ManyToOne
-	@JoinColumn(name="restaurantId")
-	private Restaurant restaurant;
-
-
 }
