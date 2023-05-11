@@ -39,4 +39,6 @@ public class Runner {
 		this.deliveryFees = deliveryFees;
 	}
 
+
 }
+

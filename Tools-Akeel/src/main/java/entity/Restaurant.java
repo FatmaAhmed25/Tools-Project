@@ -40,4 +40,7 @@ public class Restaurant {
 		this.ownerId = ownerId;
 	}
 
+
 }
+
+

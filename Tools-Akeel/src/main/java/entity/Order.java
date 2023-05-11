@@ -24,7 +24,14 @@ public class Order {
 	private Runner runnerID;
 	@ManyToOne
 	@JoinColumn(name = "resturantID")
+
 	private Restaurant resturantID;
 	@Enumerated(EnumType.ORDINAL)
 	private Status status;
 }
+
+	private Resturant resturantID;
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
+}
+
