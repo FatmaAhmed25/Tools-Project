@@ -1,6 +1,8 @@
 package entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +13,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	private String name;
+	
+	@Enumerated(EnumType.STRING)
 	private Role role;
 	public String getId() {
 		return id;
@@ -24,5 +28,13 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
+	
 
 }

@@ -1,3 +1,4 @@
+/*
 package entity;
 
 import java.util.ArrayList;
@@ -28,3 +29,4 @@ public class Order {
 	@Enumerated(EnumType.ORDINAL)
 	private Status status;
 }
+*/
