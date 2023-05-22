@@ -27,7 +27,7 @@ import entity.Role;
 import entity.User;
 import javax.annotation.security.RolesAllowed;
 
-//@RolesAllowed("OWNER")
+@RolesAllowed("OWNER")
 @Path("/owner")
 @Stateless
 @Consumes(MediaType.APPLICATION_JSON)

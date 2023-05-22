@@ -1,7 +1,11 @@
 package Controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -10,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import entity.*;
 
-//@RolesAllowed("PermitAll")
+@PermitAll
 @Stateless
 @Path("/user")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -23,7 +27,7 @@ public class UserService {
     @Path("/signUp")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String signUp(User user) {
         String response = "Signed up!";
         TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username AND u.role = :role", User.class);
@@ -39,14 +43,50 @@ public class UserService {
                 Owner owner = new Owner();
                 owner.setUsername(user.getUsername());
                 owner.setPassword(user.getPassword());
-                owner.setRole(user.getRole());
+                owner.setRole(user.getRole());       
                 em.persist(owner);
+                
+        		String[] path = new String[] {
+        			    "cmd.exe", "/c", "%JBOSS_HOME%/bin/add-user.bat",
+        			    "-a",
+        			    "-u", user.getUsername(),
+        			    "-p", user.getPassword(),
+        			    "-g", user.getRole().toString()
+        			};
+        		ProcessBuilder pb = new ProcessBuilder(path);
+        		
+        		try {
+        			Process p = pb.start();		
+        			
+        		} catch (IOException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+                
             } else if (user.getRole() == Role.CUSTOMER) {
                 Customer customer = new Customer();
                 customer.setUsername(user.getUsername());
                 customer.setPassword(user.getPassword());
                 customer.setRole(user.getRole());
                 em.persist(customer);
+                
+        		String[] path = new String[] {
+        			    "cmd.exe", "/c", "%JBOSS_HOME%/bin/add-user.bat",
+        			    "-a",
+        			    "-u", user.getUsername(),
+        			    "-p", user.getPassword(),
+        			    "-g", user.getRole().toString()
+        			};
+        		ProcessBuilder pb = new ProcessBuilder(path);
+        		
+        		try {
+        			Process p = pb.start();		
+        			
+        		} catch (IOException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+
             }
         }
         return response;
@@ -76,6 +116,24 @@ public class UserService {
 		currentRunner.setDeliveryFees(fees);
 		currentRunner.setAvailable(true);         
 		em.persist(currentRunner);
+		
+		String[] path = new String[] {
+			    "cmd.exe", "/c", "%JBOSS_HOME%/bin/add-user.bat",
+			    "-a",
+			    "-u", user.getUsername(),
+			    "-p", user.getPassword(),
+			    "-g", user.getRole().toString()
+			};
+		ProcessBuilder pb = new ProcessBuilder(path);
+		
+		try {
+			Process p = pb.start();		
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
  
         }
 		return response;
