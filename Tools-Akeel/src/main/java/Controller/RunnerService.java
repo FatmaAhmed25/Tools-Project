@@ -107,6 +107,38 @@ public class RunnerService {
         return "Order"+orderId+" is reject";
     }
 	
+	@Path("/acceptOrder/{orderId}/{runnerId}")
+    @PUT
+    public String acceptOrder(@PathParam("orderId") String orderId,@PathParam("runnerId") String runnerId) {
+        Order order = entityManager.find(Order.class, orderId);
+
+        if (order == null) {
+            return "No order with this id";
+        }
+        if (order.getStatus() == OrderStatus.CANCELED) {
+            return "the order is already canceled";
+        }
+        if (order.getStatus() == OrderStatus.DELIVERED) {
+            return "the order is already delivered";
+        }
+        if (order.getStatus() == OrderStatus.DELIVERING) {
+            return "the order is already accepted ";
+        }
+       
+        Runner runner = entityManager.find(Runner.class, runnerId);
+        if (runner == null) {
+            return "No runner with this id";
+        }
+        if (!runner.isAvailable()) {
+            return "Runner "+runnerId+"is not available";
+        }
+        order.setStatus(OrderStatus.DELIVERING);
+        runner.setAvailable(false);
+        entityManager.persist(order);
+        entityManager.persist(runner);
+        
+        return "Order"+orderId+" is accepted";
+    }
 	
 
 
