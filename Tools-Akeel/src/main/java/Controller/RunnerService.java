@@ -71,7 +71,7 @@ public class RunnerService {
                 .setParameter("status", OrderStatus.DELIVERED)
                 .getResultList();
 
-        return "completed Order are: "+ completedOrders.size();
+        return "completed orders are: "+ completedOrders.size();
     }
 	
 	@Path("/rejectOrder/{orderId}/{runnerId}")
