@@ -1,5 +1,4 @@
 package Controller;
-
 import java.awt.MenuItem;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,13 +18,16 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-
+//import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.PathVariable;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import entity.*;
 
+
+@RolesAllowed("CUSTOMER")
 @Stateless
 @Path("/customer")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -114,4 +116,83 @@ public class CustomerService {
         Collections.shuffle(runners);
         return runners.get(0);
     }
+    @PUT
+    @Path("/editOrderAddItem/{customerId}/{orderID}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String addItemToOrder(@PathParam("customerId") String customerId,@PathParam("orderID")String orderID, ArrayList<Integer> itemIds) {
+    	Order order=em.find(Order.class, orderID);
+    	if(order==null)return "No order with this ID";
+    	if (order.getStatus() != OrderStatus.PREPARING || order.getStatus() == OrderStatus.CANCELED) {
+            return("Order cannot be edited");
+        }
+    	 List<Meal> items = new ArrayList<Meal>();
+         for (Integer id : itemIds) {
+             Meal item = em.find(Meal.class, id);
+             if(item==null) return "item with id "+id+" not found";
+             System.out.println(item.toString());
+             if (item != null) {
+                 items.add(item);
+                 order.getItems().add(item);
+             }
+         }
+    	
+         return order.getItems().toString()+"    ID="+order.getId();
+    }
+    @PUT
+    @Path("/editOrderRemoveItem/{customerId}/{orderID}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String removeItemFromOrder(@PathParam("customerId") String customerId,@PathParam("orderID")String orderID, ArrayList<Integer> itemIds) {
+    	Order order=em.find(Order.class, orderID);
+    	if(order==null)return "No order with this ID";
+    	if (order.getStatus() != OrderStatus.PREPARING || order.getStatus() == OrderStatus.CANCELED) {
+            return("Order cannot be edited");
+        }
+    	 List<Meal> items = new ArrayList<Meal>();
+         for (Integer id : itemIds) {
+             Meal item = em.find(Meal.class, id);
+             if(item==null) return "item with id "+id+" not found";
+             System.out.println(item.toString());
+             if (item != null) {
+                 items.remove(item);
+                 order.getItems().remove(item);
+             }
+         }
+   
+    	
+         return order.getItems().toString()+"    ID="+order.getId();
+    }
+
+    @GET
+    @Path("/getAllRestaurants")
+    public String getAllRestaurants() {
+    	String output="";
+    	TypedQuery<Restaurant> query = em.createQuery("SELECT u FROM Restaurant u " , Restaurant.class);
+    	List<Restaurant> list=query.getResultList();
+        for(int i=0;i<list.size();i++)
+		{
+			output+="ResturanID: "+list.get(i).getId()+"\n"+"Restuarant Name: "+list.get(i).getName()+"\nRestaurant Owner:"+ list.get(i).getOwner().getUsername()+list.get(i).printMenu()+"   \n";
+		}
+		return output;
+    }
+    @GET
+    @Path("/listOrdersByCustomerId/{customerId}")
+    public String listOrdersByCustomerId(@PathParam("customerId")String customerId) {
+    	String output="";
+        Query query = em.createQuery("SELECT o FROM Order o WHERE o.customer.id = :customerId");
+        query.setParameter("customerId", customerId);
+        List<Order> list= query.getResultList();
+        for(Order i: list)
+        {
+        	for(int j=0;j<i.getItems().size();j++)
+        	{
+        		output+="OrderID: "+ i.getId()+"  "+i.getItems().get(j)+"  |  ";
+        	}
+        	output+=i.getStatus();
+        	output+="\n";
+        }
+        return output;
+    }
+
 }
