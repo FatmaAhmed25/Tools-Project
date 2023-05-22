@@ -172,7 +172,9 @@ public class CustomerService {
     	List<Restaurant> list=query.getResultList();
         for(int i=0;i<list.size();i++)
 		{
+
 			output+="ResturanID: "+list.get(i).getId()+"\n"+"Restuarant Name: "+list.get(i).getName()+"\nRestaurant Owner:"+ list.get(i).getOwner().getUsername()+list.get(i).printMenu()+"   \n";
+
 		}
 		return output;
     }
@@ -195,4 +197,6 @@ public class CustomerService {
         return output;
     }
 
+
 }
+
