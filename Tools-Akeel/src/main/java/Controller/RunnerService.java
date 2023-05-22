@@ -54,7 +54,21 @@ public class RunnerService {
         return "orderId: " + orderId + "  is deliverd ;-) ";
     }
 	
+	@Path("/getNumberOfTripsCompleted/{runnerID}")
+	@GET
+    public String getNumberOfTripsCompleted(@PathParam("runnerID")String runnerId) {
+        Runner runner = entityManager.find(Runner.class, runnerId);
 
+        List<Order> completedOrders = entityManager.createQuery(
+                "SELECT o FROM Order o WHERE o.runner = :runner AND o.status = :status",
+                Order.class)
+                .setParameter("runner", runner)
+                .setParameter("status", OrderStatus.DELIVERED)
+                .getResultList();
+
+        return "completed Order are: "+ completedOrders.size();
+    }
+	
 
 
 }
