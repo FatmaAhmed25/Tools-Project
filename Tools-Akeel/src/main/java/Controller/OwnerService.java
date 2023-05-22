@@ -113,18 +113,18 @@ public class OwnerService {
 	
 	
 	@Path("/getMeals")
-	@GET
-	public String getMeals()
-	{
-		String output="";
-		TypedQuery<Meal> query = entityManager.createQuery("SELECT u FROM Meal u " , Meal.class);
-		List<Meal> list=query.getResultList();
-		for(int i=0;i<list.size();i++)
-		{
-			output+=list.get(i).getRestaurant().getId();
-		}
-		return output;
-	}
+    @GET
+    public String getMeals()
+    {
+        String output="";
+        TypedQuery<Meal> query = entityManager.createQuery("SELECT u FROM Meal u " , Meal.class);
+        List<Meal> list=query.getResultList();
+        for(int i=0;i<list.size();i++)
+        {
+            output+="RestaurantID: "+list.get(i).getRestaurant().getId()+" - Meal Name: "+list.get(i).getName()+" - Price: "+list.get(i).getPrice()+" - Description: "+list.get(i).getDescription()+"\n";
+        }
+        return output;
+    }
 	
 /*	
 	@Path("/createMenu")

@@ -1,5 +1,4 @@
 package Controller;
-
 import java.awt.MenuItem;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,13 +18,16 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-
+//import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.PathVariable;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import entity.*;
 
+
+@RolesAllowed("CUSTOMER")
 @Stateless
 @Path("/customer")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -170,7 +172,9 @@ public class CustomerService {
     	List<Restaurant> list=query.getResultList();
         for(int i=0;i<list.size();i++)
 		{
-			output+=list.get(i).printMenu()+"   ";
+
+			output+="ResturanID: "+list.get(i).getId()+"\n"+"Restuarant Name: "+list.get(i).getName()+"\nRestaurant Owner:"+ list.get(i).getOwner().getUsername()+list.get(i).printMenu()+"   \n";
+
 		}
 		return output;
     }
@@ -193,5 +197,6 @@ public class CustomerService {
         return output;
     }
 
-    
+
 }
+

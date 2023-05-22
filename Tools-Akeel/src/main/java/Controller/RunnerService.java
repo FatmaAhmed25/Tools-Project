@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import java.util.List;
-//@RolesAllowed("RUNNER")
+@RolesAllowed("RUNNER")
 @Stateless
 @Path("/runner")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -73,7 +73,6 @@ public class RunnerService {
 
         return "completed Order are: "+ completedOrders.size();
     }
-	
 	
 	@Path("/rejectOrder/{orderId}/{runnerId}")
     @PUT
@@ -139,7 +138,20 @@ public class RunnerService {
         
         return "Order"+orderId+" is accepted";
     }
-	
 
-
-}
+}//
+//@Path("/runner")
+//@Stateless
+//@Consumes(MediaType.APPLICATION_JSON)
+//@Produces(MediaType.APPLICATION_JSON)
+//public class RunnerService {
+//	
+//	UserService us;
+//	Runner runner = us.getCurrentRunner();
+//	
+//	@GET
+//	public void checkRunner()
+//	{
+//		System.out.println(runner.getName());
+//	}
+//}
