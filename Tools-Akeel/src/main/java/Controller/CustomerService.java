@@ -137,4 +137,42 @@ public class CustomerService {
     	
          return order.getItems().toString()+"    ID="+order.getId();
     }
+    @PUT
+    @Path("/editOrderRemoveItem/{customerId}/{orderID}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String removeItemFromOrder(@PathParam("customerId") String customerId,@PathParam("orderID")String orderID, ArrayList<Integer> itemIds) {
+    	Order order=em.find(Order.class, orderID);
+    	if(order==null)return "No order with this ID";
+    	if (order.getStatus() != OrderStatus.PREPARING || order.getStatus() == OrderStatus.CANCELED) {
+            return("Order cannot be edited");
+        }
+    	 List<Meal> items = new ArrayList<Meal>();
+         for (Integer id : itemIds) {
+             Meal item = em.find(Meal.class, id);
+             if(item==null) return "item with id "+id+" not found";
+             System.out.println(item.toString());
+             if (item != null) {
+                 items.remove(item);
+                 order.getItems().remove(item);
+             }
+         }
+   
+    	
+         return order.getItems().toString()+"    ID="+order.getId();
+    }
+
+    @GET
+    @Path("/getAllRestaurants")
+    public String getAllRestaurants() {
+    	String output="";
+    	TypedQuery<Restaurant> query = em.createQuery("SELECT u FROM Restaurant u " , Restaurant.class);
+    	List<Restaurant> list=query.getResultList();
+        for(int i=0;i<list.size();i++)
+		{
+			output+=list.get(i).printMenu()+"   ";
+		}
+		return output;
+    }
+    
 }
