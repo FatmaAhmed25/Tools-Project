@@ -6,17 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Runner {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+public class Runner extends User{
+//	@Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private String id;
 	private String name;
-	private boolean isAvailable;
+	private boolean isAvailable=true;
 	private double deliveryFees;
 
-	public String getId() {
-		return id;
-	}
+//	public String getId() {
+//		return id;
+//	}
 	public String getName() {
 		return name;
 	}
