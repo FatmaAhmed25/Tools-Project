@@ -10,15 +10,20 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import java.util.List;
 //@RolesAllowed("RUNNER")
 @Stateless
 @Path("/runner")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.TEXT_PLAIN)
 public class RunnerService {
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -68,6 +73,40 @@ public class RunnerService {
 
         return "completed Order are: "+ completedOrders.size();
     }
+	
+	
+	@Path("/rejectOrder/{orderId}/{runnerId}")
+    @PUT
+    public String rejectOrder(@PathParam("orderId") String orderId,@PathParam("runnerId") String runnerId) {
+        Order order = entityManager.find(Order.class, orderId);
+
+        if (order == null) {
+            return "No order with this id";
+        }
+        if (order.getStatus() == OrderStatus.CANCELED) {
+            return "the order is already canceled";
+        }
+        if (order.getStatus() == OrderStatus.DELIVERED) {
+            return "the order is already delivered";
+        }
+        if (order.getStatus() == OrderStatus.DELIVERING) {
+            return "the order is already accepted ";
+        }
+       
+        Runner runner = entityManager.find(Runner.class, runnerId);
+        if (runner == null) {
+            return "No runner with this id";
+        }
+        if (!runner.isAvailable()) {
+            return "Runner "+runnerId+"is not available";
+        }
+   
+        entityManager.persist(order);
+        entityManager.persist(runner);
+        
+        return "Order"+orderId+" is reject";
+    }
+	
 	
 
 
