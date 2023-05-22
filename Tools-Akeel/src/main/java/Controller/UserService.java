@@ -23,7 +23,7 @@ public class UserService {
     @Path("/signUp")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String signUp(User user) {
         String response = "Signed up!";
         TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username AND u.role = :role", User.class);
