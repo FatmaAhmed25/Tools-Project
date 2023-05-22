@@ -114,4 +114,27 @@ public class CustomerService {
         Collections.shuffle(runners);
         return runners.get(0);
     }
+    @PUT
+    @Path("/editOrderAddItem/{customerId}/{orderID}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String addItemToOrder(@PathParam("customerId") String customerId,@PathParam("orderID")String orderID, ArrayList<Integer> itemIds) {
+    	Order order=em.find(Order.class, orderID);
+    	if(order==null)return "No order with this ID";
+    	if (order.getStatus() != OrderStatus.PREPARING || order.getStatus() == OrderStatus.CANCELED) {
+            return("Order cannot be edited");
+        }
+    	 List<Meal> items = new ArrayList<Meal>();
+         for (Integer id : itemIds) {
+             Meal item = em.find(Meal.class, id);
+             if(item==null) return "item with id "+id+" not found";
+             System.out.println(item.toString());
+             if (item != null) {
+                 items.add(item);
+                 order.getItems().add(item);
+             }
+         }
+    	
+         return order.getItems().toString()+"    ID="+order.getId();
+    }
 }
