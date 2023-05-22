@@ -174,5 +174,24 @@ public class CustomerService {
 		}
 		return output;
     }
+    @GET
+    @Path("/listOrdersByCustomerId/{customerId}")
+    public String listOrdersByCustomerId(@PathParam("customerId")String customerId) {
+    	String output="";
+        Query query = em.createQuery("SELECT o FROM Order o WHERE o.customer.id = :customerId");
+        query.setParameter("customerId", customerId);
+        List<Order> list= query.getResultList();
+        for(Order i: list)
+        {
+        	for(int j=0;j<i.getItems().size();j++)
+        	{
+        		output+="OrderID: "+ i.getId()+"  "+i.getItems().get(j)+"  |  ";
+        	}
+        	output+=i.getStatus();
+        	output+="\n";
+        }
+        return output;
+    }
+
     
 }
