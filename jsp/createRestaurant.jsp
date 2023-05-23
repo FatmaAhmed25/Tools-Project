@@ -120,6 +120,7 @@
          headers: {
             'Content-Type': 'application/json'},});
         const password = await responsePassword.text(); 
+        console.log(password)
 
 
 
