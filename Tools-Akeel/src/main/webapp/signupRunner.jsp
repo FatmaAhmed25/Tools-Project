@@ -45,7 +45,7 @@
           
           if (result  === "Signed up!") {
             console.log("hiiiiiii")
-            window.location.href = 'http://localhost:8080/Tools-Akeel/jsp/runnerHomePage.jsp?username='+username; // Redirect to homepage.jsp with query parameters
+            window.location.href = 'http://localhost:8080/Tools-Akeel/runnerHomePage.jsp?username='+username; // Redirect to homepage.jsp with query parameters
  // Redirect to homepage.jsp
             resultDiv.textContent = `Welcome, ${username}!`;
           } else {

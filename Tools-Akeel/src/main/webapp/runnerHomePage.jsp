@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Homepage</title>
-    <link rel="stylesheet" href="customerhm.css">
+    <link rel="stylesheet" href="CustomerHM.css">
   </head>
   <body>
     <div class="container">
