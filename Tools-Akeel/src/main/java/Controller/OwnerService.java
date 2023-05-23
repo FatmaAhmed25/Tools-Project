@@ -98,6 +98,20 @@ public class OwnerService {
 	    }
 	    return output;
 	}
+	@Path("/getRestaurantByOwner/{ownerID}")
+	@GET
+	public String getRestaurantByOwner(@PathParam("ownerID") String ownerID) {
+	    String output = "";
+	    int id = 0;
+	    Owner owner = entityManager.find(Owner.class, ownerID);
+	    if (owner != null) {
+	        id = owner.getRestaurants().getId();
+	    } else {
+	        output = "Restaurant not found.";
+	    }
+	    output+=id;
+	    return output;
+	}
 	
 	@Path("/getRestaurantReport/{ownerID}")
 	@GET
@@ -146,28 +160,28 @@ public class OwnerService {
 //		this.owner=owner;
 //		return "logged in successfully";
 //	}
-	@Path("/editMealName/{ownerID}/{restaurantId}/{mealID}/{name}")
+	@Path("/editMealName/{restaurantId}/{mealID}/{name}")
 	@PUT
-	public String editMealNameInMenu(@PathParam("ownerID")String ownerID,@PathParam("restaurantId")int restaurantId,@PathParam("mealID")int mealID,@PathParam("name")String name)
+	public String editMealNameInMenu(@PathParam("restaurantId")int restaurantId,@PathParam("mealID")int mealID,@PathParam("name")String name)
 	{
-		Owner owner = entityManager.find(Owner.class, ownerID);
+
 		Restaurant restaurant = entityManager.find(Restaurant.class, restaurantId);
 		Meal meal =entityManager.find(Meal.class, mealID);
 		meal.setName(name);		
 		return restaurant.printMenu();
 		
 	}
-//	@Path("/editMealPrice")
-//	@PUT
-//	public String editMealPriceInMenu(Owner owner,int restaurantId,int mealID,Double price)
-//	{
-//		Restaurant restaurant = entityManager.find(Restaurant.class, restaurantId);
-//		Meal meal =entityManager.find(Meal.class, mealID);
-//		meal.setPrice(mealID);
-//		
-//		return null;
-//		
-//	}
+	@Path("/editMealPrice/{restaurantId}/{mealID}/{price}")
+	@PUT
+	public String editMealPriceInMenu(@PathParam("restaurantId")int restaurantId,@PathParam("mealID")int mealID,@PathParam("price")Double price)
+	{
+		Restaurant restaurant = entityManager.find(Restaurant.class, restaurantId);
+		Meal meal =entityManager.find(Meal.class, mealID);
+		meal.setPrice(price);
+		
+		return restaurant.printMenu();
+		
+	}
 //	@Path("/getRestaurantReport")
 //	@GET
 //	public String getRestaurantReport(Owner owner,int restaurantId)

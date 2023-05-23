@@ -120,6 +120,7 @@
          headers: {
             'Content-Type': 'application/json'},});
         const password = await responsePassword.text(); 
+        console.log(password)
 
 
 
@@ -150,9 +151,10 @@
             },
             body: requestBody
         });
-
+            const output=await response.text()
             if (response.ok) {
                 console.log("hello")
+                alert(output);
             }
             }catch (error) {
             console.log(error);

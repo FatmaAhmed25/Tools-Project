@@ -31,6 +31,12 @@
     </form>
     
     <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+
+        // Get the username and password values from the query parameters
+      const username = urlParams.get('username');
+      console.log(username)
       let nextItemId = 2;
     
       function addItem() {
@@ -62,8 +68,13 @@
 
         const customerId = document.getElementById("customer-id").value;
         const restaurantId = document.getElementById("restaurant-id").value;
-        const username='Sarah';
-        const password='1234';
+        const getPasswordURL ='http://localhost:8080/Tools-Akeel/api/user/getUserPassword/'+username+'/CUSTOMER';
+        const responsePassword=await fetch(getPasswordURL, {
+         method: 'GET',
+         headers: {
+            'Content-Type': 'application/json'},});
+        const password = await responsePassword.text(); 
+
         const itemIds = [];
         const itemDivs = document.getElementsByClassName("item");
         for (let i = 0; i < itemDivs.length; i++) {
@@ -71,6 +82,7 @@
 
             itemIds.push(parseInt(itemId));
         }
+        console.log(password)
 
         const url = 'http://localhost:8080/Tools-Akeel/api/customer/createOrder/' +customerId+'/'+restaurantId;
         const requestBody = JSON.stringify(itemIds);
@@ -87,7 +99,8 @@
           });
 
           if(response.ok) {
-            const orderId = await response.text();
+            const output = await response.text();
+            alert(output);
             console.log(`Order created with IDorderId}`);
             console.log(`res created with ID ${restaurantId}`);
             console.log(`cus created with ID ${customerId}`);
