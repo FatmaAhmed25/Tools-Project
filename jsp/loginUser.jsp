@@ -42,13 +42,19 @@
           console.log(result);
           const resultDiv = document.getElementById('result');
           
-          if (result.includes('logged in successfully')) {
-            //console.log('Redirecting to: CustomerHM.jsp?username=' + username);
-              //window.location.href = 'http://localhost:8080/Tools-Akeel/jsp/CustomerHM.jsp?username=' + username; // Redirect to homepage.jsp with query parameters
-              
+          if (result.includes('logged in successfully') && role==="CUSTOMER") {
+              console.log('Redirecting to: CustomerHM.jsp?username=' + username);
               window.location.href = 'CustomerHM.jsp?username=' + username;
-           //  window.location.href = 'http://localhost:8080/Tools-Akeel/jsp/customerHomePage.jsp?username='+username;
-          } else {
+          } 
+          else if (result.includes('logged in successfully') && role==="OWNER") {
+           
+              window.location.href = 'ownerHomePage.jsp?username=' + username;
+          }
+          else if (result.includes('logged in successfully') && role==="RUNNER") {
+        
+              window.location.href = 'runnerHomePage.jsp?username=' + username;
+          }
+          else {
             resultDiv.textContent = result;
           }
         } catch (error) {
