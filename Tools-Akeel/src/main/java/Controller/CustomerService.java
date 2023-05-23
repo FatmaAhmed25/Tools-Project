@@ -82,7 +82,7 @@ public class CustomerService {
         customer.getOrders().add(order);
         em.persist(customer);
         em.persist(restaurant);
-        return "OrderID: "+order.getId()+"      "+order.getItems().toString()+"    " + "    resturantID:"+restaurant.getId();
+        return order.toString();
     }
 
     
