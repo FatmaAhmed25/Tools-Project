@@ -1,0 +1,71 @@
+body {
+    background-color: #F5EFFF;
+    font-family: Arial, sans-serif;
+    color: #4B0082;
+    }
+    
+    h1 {
+    color: #4B0082;
+    text-align: center;
+    }
+    
+    form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #D8BFD8;
+    border-radius: 10px;
+    }
+    
+    label {
+    display: block;
+    margin-bottom: 10px;
+    color: #4B0082;
+    }
+    
+    input[type=text], input[type=number] {
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    }
+    
+    button[type=submit], button[type=button] {
+    border: none;
+    background-color: #4B0082;
+    color: #FFFFFF;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    }
+    
+    button[type=submit]:hover, button[type=button]:hover {
+    background-color: #8B008B;
+    }
+    
+    fieldset {
+    margin-bottom: 20px;
+    border: none;
+    padding: 0;
+    }
+    
+    legend {
+    font-weight: bold;
+    color: #4B0082;
+    }
+    
+    .cancel {
+    background-color: #4B0082;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+    
+    .cancel:hover {
+    background-color: #8B008B;
+    }

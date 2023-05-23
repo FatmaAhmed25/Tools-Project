@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Create Order</title>
+  <title>Edit Order - Add Item</title>
   <link rel="stylesheet" href="customerhomepage.css">
 </head>
 <body>
     
-    <h1>Create Order</h1>
+    <h1>Edit Order - Add Item</h1>
     <form id="order-form">
       <label for="customer-id">Customer ID:</label>
       <input type="text" id="customer-id" name="customer-id"><br><br>
         
-      <label for="restaurant-id">Restaurant ID:</label>
-      <input type="number" id="restaurant-id" name="restaurant-id"><br><br>
+      <label for="order-id">Order ID:</label>
+      <input type="text" id="order-id" name="order-id"><br><br>
         
       <fieldset>
         <legend>Items:</legend>
@@ -27,7 +27,7 @@
       </fieldset>
     
       <br><br>
-      <button type="submit">Create order</button>
+      <button type="submit">Add item to order</button>
     </form>
     
     <script>
@@ -35,8 +35,8 @@
     
       function addItem() {
         const itemListDiv = document.getElementById("item-list");
-    
-        const itemDiv = document.createElement("div");
+
+        const itemDiv =document.createElement("div");
         itemDiv.className = "item";
         
         const itemIdLabel = document.createElement("label");
@@ -61,9 +61,7 @@
         event.preventDefault();
 
         const customerId = document.getElementById("customer-id").value;
-        const restaurantId = document.getElementById("restaurant-id").value;
-        const username='Sarah';
-        const password='1234';
+        const orderId = document.getElementById("order-id").value;
         const itemIds = [];
         const itemDivs = document.getElementsByClassName("item");
         for (let i = 0; i < itemDivs.length; i++) {
@@ -72,33 +70,29 @@
             itemIds.push(parseInt(itemId));
         }
 
-        const url = 'http://localhost:8080/Tools-Akeel/api/customer/createOrder/' +customerId+'/'+restaurantId;
+        const url = 'http://localhost:8080/Tools-Akeel/api/customer/editOrderAddItem/'+customerId+'/'+orderId;
         const requestBody = JSON.stringify(itemIds);
 
         try {
           const response = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
-          
-              'Content-Type': 'application/json',
-              'Authorization': 'Basic ' + btoa(username + ':' + password)
-            },
+              'Content-Type': 'application/json'
+              },
             body: requestBody
           });
 
-          if(response.ok) {
-            const orderId = await response.text();
-            console.log(`Order created with IDorderId}`);
-            console.log(`res created with ID ${restaurantId}`);
-            console.log(`cus created with ID ${customerId}`);
+          if (response.ok) {
+            alert("Item(s) added to order successfully!");
           } else {
-            console.log('hi');
-            console.log(`Error creating order13: ${response.status}`);
+            alert("Failed to add item(s) to order.");
           }
+
         } catch (error) {
-          console.log(`Error creating order12: ${error}`);
+          console.error(error);
+          alert("An error occurred while adding item(s) to order.");
         }
       });
     </script>
-</body>
+  </body>
 </html>
