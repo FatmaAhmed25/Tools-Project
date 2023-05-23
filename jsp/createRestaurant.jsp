@@ -150,9 +150,10 @@
             },
             body: requestBody
         });
-
+            const output=await response.text()
             if (response.ok) {
                 console.log("hello")
+                alert(output);
             }
             }catch (error) {
             console.log(error);
