@@ -2,10 +2,11 @@
 <html>
 <head>
   <title>Al-Akeel Food Ordering Platform</title>
-  <link rel="stylesheet" href="homepage.css">
+  
   <style>
     body {
       background-image: url("photo4.jpg"); /* Add the path to your background image */
+      color: #000000;
       background-size: cover;
       background-position: center center;
     }
@@ -51,7 +52,7 @@
         <div id="buttons">
             <a href="loginUser.jsp"><button class="button">Login</button></a>
             <a href="signupCustomer.jsp"><button class="button">Create Account</button></a>
-            <a href="signupRunner.jsp"><button class= "button">Create Account As Runner</button></a>
+            <a href="signUpRunner.jsp"><button class= "button">Create Account As Runner</button></a>
         </div>
         <!-- <img src="food.jpg"> Add the path to your photo -->
     </div>
