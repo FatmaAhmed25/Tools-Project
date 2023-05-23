@@ -5,6 +5,7 @@
 <html>
 <head>
   <title>Create Restaurant</title>
+  <link rel="stylesheet" href="createRestaurant.css">
 </head>
 <body>
     
@@ -36,6 +37,15 @@
     </form>
     
     <script>
+        // Get the query parameters from the URL
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        // Get the username and password values from the query parameters
+        const username = urlParams.get('username');
+
+        // Use the username and password values as needed
+        console.log('Welcome, '+username+"!");
       let nextMenuItemId = 2;
     
       function addMenuItem() {
@@ -86,7 +96,7 @@
       }
         document.getElementById("restaurant-form").addEventListener("submit", async function(event) {
         event.preventDefault();
-
+        
         const name = document.getElementById("name").value;
 
         const menuItems = [];
@@ -104,40 +114,77 @@
 
             menuItems.push(menuItem);
         }
-        console.log(menuItems)
-        const ownerID = "1"; // replace with actual owner ID
-        const url = 'http://localhost:8080/Tools-Akeel/api/owner/createRestaurant/'+ownerID+'/'+name;
-        console.log(url)
+        const getPasswordURL ='http://localhost:8080/Tools-Akeel/api/user/getUserPassword/'+username+'/OWNER';
+        const responsePassword=await fetch(getPasswordURL, {
+         method: 'GET',
+         headers: {
+            'Content-Type': 'application/json'},});
+        const password = await responsePassword.text(); 
 
-        const requestBody = JSON.stringify(menuItems);
-        console.log(requestBody)
+
+
+        const getIDURL ='http://localhost:8080/Tools-Akeel/api/user/getUserID/'+username+'/OWNER';
         try {
-        const response = await fetch(url, {
-         method: 'POST',
+        const response1=await fetch(getIDURL, {
+         method: 'GET',
          headers: {
             'Content-Type': 'application/json'
          },
-         body: requestBody
       });
+        const ownerID = await response1.text(); 
+        console.log(ownerID)
+        if (response1.ok) {
+            console.log("okkk")
+            console.log(ownerID)
+            const url = 'http://localhost:8080/Tools-Akeel/api/owner/createRestaurant/' + ownerID + '/' + name;
+            console.log(url)
 
-        if (response.ok) {
-            console.log("hello")
+            const requestBody = JSON.stringify(menuItems);
+            console.log(requestBody)
+            try {
+            const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + btoa(username + ':' + password)
+            },
+            body: requestBody
+        });
+
+            if (response.ok) {
+                console.log("hello")
+            }
+            }catch (error) {
+            console.log(error);
+            }
         }
         }catch (error) {
+            console.log("baad")
           console.log(error);
         }
+        
 
+    //     // replace with actual owner ID
+    //     const url = 'http://localhost:8080/Tools-Akeel/api/owner/createRestaurant/'+ownerID+'/'+name;
+    //     console.log(url)
 
-        // const xhr = new XMLHttpRequest();
-        // console.log(xhr)
-        // xhr.open("POST", url);
-        // xhr.setRequestHeader("Content-Type", "application/json");
-        // xhr.onload = function() {
-        //     if (xhr.status === 200) {
-        //     console.log(xhr.responseText);
-        //     }
-        // };
-        // xhr.send(requestBody); // send the request with the requestBody as the argument
+    //     const requestBody = JSON.stringify(menuItems);
+    //     console.log(requestBody)
+    //     try {
+    //     const response = await fetch(url, {
+    //      method: 'POST',
+    //      headers: {
+    //         'Content-Type': 'application/json'
+    //      },
+    //      body: requestBody
+    //   });
+
+    //     if (response.ok) {
+    //         console.log("hello")
+    //     }
+    //     }catch (error) {
+    //       console.log(error);
+    //     }
         });
 
 

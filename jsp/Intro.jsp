@@ -50,9 +50,10 @@
         <p>To get started, please login or create an account:</p>
         <div id="buttons">
             <a href="loginUser.jsp"><button class="button">Login</button></a>
-            <a href="signUpCustomer.jsp"><button class="button">Create Account</button></a>
+            <a href="signupCustomer.jsp"><button class="button">Create Account</button></a>
+            <a href="signupRunner.jsp"><button class= "button">Create Account As Runner</button></a>
         </div>
-        <img src="food.jpg" alt="Picture of food"> <!-- Add the path to your photo -->
+        <!-- <img src="food.jpg"> Add the path to your photo -->
     </div>
     
 </body>
