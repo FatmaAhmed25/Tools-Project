@@ -9,10 +9,10 @@
       <div>
         <h1>Welcome, <%= request.getParameter("username") %>!</h1>
         <p>What would you like to do?</p>
-        <button onclick="location.href='http://localhost:8080/Tools-Akeel/jsp/customerHomePage.jsp?username='+username">Create Order</button>
-        <button onclick="location.href='http://localhost:8080/Tools-Akeel/jsp/Editadditem.jsp?username='+username">Add Item</button>
-        <button onclick="location.href='http://localhost:8080/Tools-Akeel/jsp/editremoveitem.jsp?username='+username">Remove Item</button>
-        <button onclick="location.href='http://localhost:8080/Tools-Akeel/jsp/cancelorder.jsp?username='+username">Cancel Order</button>
+        <button onclick="location.href='http://localhost:8080/Tools-Akeel/customerHomePage.jsp?username='+username">Create Order</button>
+        <button onclick="location.href='http://localhost:8080/Tools-Akeel/Editadditem.jsp?username='+username">Add Item</button>
+        <button onclick="location.href='http://localhost:8080/Tools-Akeel/editremoveitem.jsp?username='+username">Remove Item</button>
+        <button onclick="location.href='http://localhost:8080/Tools-Akeel/cancelorder.jsp?username='+username">Cancel Order</button>
       </div>
     </div>
     <script>
