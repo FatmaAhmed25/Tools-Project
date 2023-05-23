@@ -91,7 +91,28 @@ public class UserService {
         }
         return response;
     }
-    
+    @Path("/getUserID/{username}/{role}")
+	@GET
+    public String getUserID(@PathParam("username")String username,@PathParam("role")Role role)
+    {
+    	TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username AND u.role = :role", User.class);
+        query.setParameter("username", username);
+        query.setParameter("role", role);
+        List<User> users = query.getResultList();
+        return users.get(0).getId();
+        
+    }
+    @Path("/getUserPassword/{username}/{role}")
+	@GET
+    public String getUserPassword(@PathParam("username")String username,@PathParam("role")Role role)
+    {
+    	TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username AND u.role = :role", User.class);
+        query.setParameter("username", username);
+        query.setParameter("role", role);
+        List<User> users = query.getResultList();
+        return users.get(0).getPassword();
+        
+    }
 	@Path("/setUpRunner/{deliveryFees}")
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
