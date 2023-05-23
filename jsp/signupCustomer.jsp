@@ -54,7 +54,7 @@ console.log(`Welcome, ${username}!`);
           if (result  === "Signed up!" && role === "CUSTOMER") {
             console.log("hiiiiiii")
             resultDiv.textContent = `Welcome, ${username}!`;
-            window.location.href = 'http://localhost:8080/Tools-Akeel/jsp/CutomerHM.jsp?username='+username; // Redirect to homepage.jsp with query parameters
+            window.location.href = 'http://localhost:8080/Tools-Akeel/jsp/CustomerHM.jsp?username='+username; // Redirect to homepage.jsp with query parameters
  // Redirect to homepage.jsp
             
           }

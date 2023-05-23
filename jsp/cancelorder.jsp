@@ -21,11 +21,21 @@
     <script>
       document.getElementById("cancel-order-form").addEventListener("submit", async function(event) {
         event.preventDefault();
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
 
+        // Get the username and password values from the query parameters
+        const username = urlParams.get('username');
+        console.log(username)
         const orderId = document.getElementById("order-id").value;
         const restaurantId = document.getElementById("restaurant-id").value;
-        const username='Sarah';
-        const password='1234';
+        
+        const getPasswordURL ='http://localhost:8080/Tools-Akeel/api/user/getUserPassword/'+username+'/CUSTOMER';
+        const responsePassword=await fetch(getPasswordURL, {
+         method: 'GET',
+         headers: {
+            'Content-Type': 'application/json'},});
+        const password = await responsePassword.text(); 
 
         const url = 'http://localhost:8080/Tools-Akeel/api/customer/cancelOrder/' + orderId + '/' + restaurantId;
 
@@ -39,6 +49,7 @@
 
           if(response.ok) {
             const message = await response.text();
+            alert(message)
             console.log(message);
           } else {
             console.log(`Error canceling order: ${response.status}`);
