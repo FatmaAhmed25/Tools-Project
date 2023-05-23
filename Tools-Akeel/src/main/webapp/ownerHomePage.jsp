@@ -73,9 +73,9 @@ button:last-child {
       </div>
       <div id="report"></div>
       <form id="order-form">
-        <button onclick="location.href='http://localhost:8080/Tools-Akeel/jsp/mealName.jsp?username='+username">Edit Meal Name</button>
-        <button onclick="location.href='http://localhost:8080/Tools-Akeel/jsp/mealPrice.jsp?username='+username">Edit Meal Price</button>
-        <button onclick="location.href='http://localhost:8080/Tools-Akeel/jsp/viewReport.jsp?username='+username">View Report</button>
+        <button onclick="location.href='http://localhost:8080/Tools-Akeel/mealName.jsp?username='+username">Edit Meal Name</button>
+        <button onclick="location.href='http://localhost:8080/Tools-Akeel/mealPrice.jsp?username='+username">Edit Meal Price</button>
+        <button onclick="location.href='http://localhost:8080/Tools-Akeel/viewReport.jsp?username='+username">View Report</button>
         
         <!-- form fields go here -->
         <button type="submit">Show Menu</button>

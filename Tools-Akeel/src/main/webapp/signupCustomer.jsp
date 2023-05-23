@@ -54,13 +54,13 @@ console.log(`Welcome, ${username}!`);
           if (result  === "Signed up!" && role === "CUSTOMER") {
             console.log("hiiiiiii")
             resultDiv.textContent = `Welcome, ${username}!`;
-            window.location.href = 'http://localhost:8080/Tools-Akeel/jsp/CustomerHM.jsp?username='+username; // Redirect to homepage.jsp with query parameters
+            window.location.href = 'http://localhost:8080/Tools-Akeel/CustomerHM.jsp?username='+username; // Redirect to homepage.jsp with query parameters
  // Redirect to homepage.jsp
             
           }
           else if(result  === "Signed up!" && role === "OWNER"){
             resultDiv.textContent = `Welcome, ${username}!`;
-            window.location.href = 'http://localhost:8080/Tools-Akeel/jsp/createRestaurant.jsp?username='+username; // Redirect to homepage.jsp with query parameters
+            window.location.href = 'http://localhost:8080/Tools-Akeel/createRestaurant.jsp?username='+username; // Redirect to homepage.jsp with query parameters
  // Redirect to homepage.jsp
           } 
           else {
