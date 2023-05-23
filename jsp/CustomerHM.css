@@ -1,0 +1,41 @@
+body {
+    background-color: #ffffff; /* purple */
+    color: #000000;/* white */
+    font-family: Arial, sans-serif;
+  }
+  
+  /*h1 {
+    font-size: 2.5em;
+    text-align: center;
+  }
+  
+  p {
+    font-size: 1.2em;
+    text-align: center;
+  }*/
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container div {
+    text-align: center;
+  }
+  
+  button {
+    background-color:  #8246af; /* white */
+    color: #ffffff; /* purple */
+    font-size: 1.2em;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #6b3d9b; /* purple */
+    color: #fff; /* white */
+  }
