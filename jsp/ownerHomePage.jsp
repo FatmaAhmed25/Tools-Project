@@ -36,16 +36,6 @@
     </form>
     
     <script>
-        // Get the query parameters from the URL
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-
-        // Get the username and password values from the query parameters
-        const username = urlParams.get('username');
-        const password = urlParams.get('password');
-
-        // Use the username and password values as needed
-        console.log('Welcome, '+username+"!");
       let nextMenuItemId = 2;
     
       function addMenuItem() {
@@ -96,7 +86,7 @@
       }
         document.getElementById("restaurant-form").addEventListener("submit", async function(event) {
         event.preventDefault();
-        
+
         const name = document.getElementById("name").value;
 
         const menuItems = [];
@@ -136,6 +126,18 @@
         }catch (error) {
           console.log(error);
         }
+
+
+        // const xhr = new XMLHttpRequest();
+        // console.log(xhr)
+        // xhr.open("POST", url);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        // xhr.onload = function() {
+        //     if (xhr.status === 200) {
+        //     console.log(xhr.responseText);
+        //     }
+        // };
+        // xhr.send(requestBody); // send the request with the requestBody as the argument
         });
 
 

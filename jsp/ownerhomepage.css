@@ -1,0 +1,63 @@
+body {
+    background-color: #f1e5ff;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  #restaurant-form {
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    width: 500px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
+  }
+  
+  fieldset {
+    border: none;
+    margin-bottom: 20px;
+  }
+  
+  legend {
+    font-weight: bold;
+  }
+  
+  .menu-item {
+    margin-bottom: 20px;
+  }
+  
+  button[type="submit"],
+  button[type="button"] {
+    background-color: #8246af;
+    color: #ffffff;
+    padding:10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  button[type="submit"]:hover,
+  button[type="button"]:hover {
+    background-color: #6b2c9e;
+  }

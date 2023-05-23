@@ -3,11 +3,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="signup.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+  
   </head>
   <body>
-    <form id="signup-form">
+    <form id="login-form">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username"><br><br>
       <label for="password">Password:</label>
@@ -18,52 +19,40 @@
         <option value="CUSTOMER">Customer</option>
         <option value="RUNNER">Runner</option>
       </select><br><br>
-      <button type="submit">Sign Up</button>
+      <button type="submit">Login</button>
     </form>
     <div id="result"></div>
     <script>
-      // Get the query parameters from the URL
-  const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-
-// Get the username and password values from the query parameters
-const username = urlParams.get('username');
-const password = urlParams.get('password');
-
-// Use the username and password values as needed
-console.log(`Welcome, ${username}!`);
-      const form = document.getElementById('signup-form');
+      const form = document.getElementById('login-form');
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
         const username = form.elements.username.value;
         const password = form.elements.password.value;
         const role = form.elements.role.value;
-        const data = { username, password,role };
+        const data = { username, password, role };
         try {
-        const response = await fetch('http://localhost:8080/Tools-Akeel/api/user/signUp',{
-          method: 'POST',
+          const response = await fetch('http://localhost:8080/Tools-Akeel/api/user/login', {
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
           });
           const result = await response.text();
-          console.log(result)
-          //const resultObj = JSON.parse(result);
+          console.log(result);
           const resultDiv = document.getElementById('result');
           
-          if (result  === "Signed up!") {
-            console.log("hiiiiiii")
-            window.location.href = 'http://localhost:8080/Tools-Akeel/jsp/customerHomePage.jsp?username='+username; // Redirect to homepage.jsp with query parameters
- // Redirect to homepage.jsp
-            resultDiv.textContent = `Welcome, ${username}!`;
+          if (result.includes('logged in successfully')) {
+           // window.location.href = 'http://localhost:8080/Tools-Akeel/jsp/CustomerHM.jsp?username=' + username; // Redirect to homepage.jsp with query parameters
+              console.log('Redirecting to: CustomerHM.jsp?username=' + username);
+              window.location.href = 'CustomerHM.jsp?username=' + username;
           } else {
             resultDiv.textContent = result;
           }
         } catch (error) {
           console.log(error);
         }
-    });
+      });
     </script>
   </body>
 </html>

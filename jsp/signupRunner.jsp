@@ -4,6 +4,7 @@
 <html>
   <head>
     <title>Sign Up</title>
+    <link rel="stylesheet" href="signuprunner.css">
   </head>
   <body>
     <form id="signup-form">
