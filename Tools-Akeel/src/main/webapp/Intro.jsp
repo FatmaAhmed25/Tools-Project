@@ -52,7 +52,7 @@
         <div id="buttons">
             <a href="loginUser.jsp"><button class="button">Login</button></a>
             <a href="signupCustomer.jsp"><button class="button">Create Account</button></a>
-            <a href="signUpRunner.jsp"><button class= "button">Create Account As Runner</button></a>
+            <a href="signupRunner.jsp"><button class= "button">Create Account As Runner</button></a>
         </div>
         <!-- <img src="food.jpg"> Add the path to your photo -->
     </div>
