@@ -190,7 +190,7 @@ public class UserService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
 	@Path("/login")
-	@GET
+	@POST
 	public String login(User user)
 	{
 		 TypedQuery<User> query = em.createQuery(

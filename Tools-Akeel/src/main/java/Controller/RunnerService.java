@@ -5,7 +5,7 @@ import entity.OrderStatus;
 import entity.Restaurant;
 import entity.RestaurantReport;
 import entity.Runner;
-
+import java.util.*;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -73,6 +73,21 @@ public class RunnerService {
 
         return "completed orders are: "+ completedOrders.size();
     }
+	@Path("/getOrders/{runnerID}")
+	@GET
+    public String getOrders(@PathParam("runnerID")String runnerId) {
+        Runner runner = entityManager.find(Runner.class, runnerId);
+        if(runner==null)return "No Runner with this id";
+        List<Order> orders = entityManager.createQuery(
+                "SELECT o FROM Order o WHERE o.runner = :runner AND o.status = :status",
+                Order.class)
+                .setParameter("runner", runner)
+                .setParameter("status", OrderStatus.PREPARING)
+                .getResultList();
+        if(orders.size()>0)
+        	return orders.get(0).toString();
+		return "No Orders";
+    }
 	
 	@Path("/rejectOrder/{orderId}/{runnerId}")
     @PUT
@@ -138,6 +153,7 @@ public class RunnerService {
         
         return "Order"+orderId+" is accepted";
     }
+	
 
 }//
 //@Path("/runner")

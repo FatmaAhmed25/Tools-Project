@@ -58,7 +58,7 @@ public class Meal {
 	public String toString()
     {
         
-        return "Name: "+name+" \tPrice : "+price+"\t Description : "+description;
+        return "Meal ID "+id +"\tName: "+name+" \tPrice : "+price+"\t Description : "+description+"\n";
         
     }
 	public Restaurant getRestaurant() {

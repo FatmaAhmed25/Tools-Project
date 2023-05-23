@@ -18,14 +18,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;  
+import java.time.format.DateTimeFormatter;  
+
 @Entity
 @Table(name = "ORDERS")
 public class Order {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
-	
-
+	  
+	private LocalDateTime date= java.time.LocalDateTime.now();
 	public String getId() {
 		return id;
 	}
@@ -59,6 +62,7 @@ public class Order {
 	private List<Meal> meals = new ArrayList<Meal>();
 	
 	public List<Meal> getItems() {
+		System.out.println(java.time.LocalDateTime.now());  
 		return meals;
 	}
 
@@ -108,6 +112,23 @@ public class Order {
 
 	public OrderStatus getStatus() {
 		return status;
+	}
+	public String toString() {
+		String output="";
+		output+="\t                  Order ID = "+id+"\n";
+		output+="Date = "+date+"\n";
+		output+="Items ordered : \n";
+		for(int i=0;i<meals.size();i++)
+		{
+			output+=meals.get(i).toString()+"\n";
+		}
+		output+="Runner fees = "+runner.getDeliveryFees()+" \n";
+		output+="Total = "+total+"\n";
+		output+="Order Status = "+status+"\n";
+		output+="Restaurant name = "+restaurant.getName()+"\n";
+		return output;
+		
+		
 	}
 
 	public void setStatus(OrderStatus status) {
